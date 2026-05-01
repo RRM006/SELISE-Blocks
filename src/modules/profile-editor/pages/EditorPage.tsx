@@ -149,13 +149,16 @@ export default function EditorPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6">
       <div className="w-full max-w-2xl space-y-6">
-        {/* Logo and Title - Centered */}
-        <div className="flex flex-col items-center gap-4 mb-6">
-          <div className="bg-blue-600 p-4 rounded-xl shadow-lg">
-            <img src="/selise-logo.svg" alt="ProfileForge" className="h-12 w-auto brightness-0 invert" />
+        {/* Logo + Title - Centered */}
+        <div className="flex flex-col items-center gap-6">
+          {/* Logo - Very visible with white background */}
+          <div className="bg-white p-4 rounded-xl shadow-xl border-2 border-blue-200">
+            <img src="/selise-logo.svg" alt="ProfileForge" className="h-16 w-auto" />
           </div>
+          
+          {/* Title row */}
           <div className="flex items-center justify-between w-full">
-            <h1 className="text-3xl font-bold flex-1 text-center">Profile Editor</h1>
+            <h1 className="text-3xl font-bold text-center flex-1">Profile Editor</h1>
             <Button variant="outline" onClick={handleLogout} className="ml-4">
               Logout
             </Button>
