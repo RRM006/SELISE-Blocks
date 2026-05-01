@@ -54,7 +54,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col items-center">
       {/* Header Image */}
       {profile.headerImageUrl ? (
         <div className="w-full h-48 md:h-64 bg-gray-200 relative">
@@ -69,7 +69,7 @@ export default function ProfilePage() {
         <div className="w-full h-48 md:h-64 bg-gradient-to-r from-blue-500 to-purple-600" />
       )}
 
-      <div className="max-w-4xl mx-auto px-6 relative -mt-16 md:-mt-20">
+      <div className="w-full max-w-4xl mx-auto px-6 relative -mt-16 md:-mt-20">
         {/* Profile Card */}
         <div className="bg-card rounded-xl shadow-xl p-6 md:p-8 border">
           {/* Profile Picture */}
@@ -99,9 +99,9 @@ export default function ProfilePage() {
 
           {/* Bio */}
           {profile.bio && (
-            <div className="mb-8">
+            <div className="mb-8 text-center">
               <h2 className="text-xl font-semibold mb-3">About</h2>
-              <p className="text-muted-foreground whitespace-pre-wrap leading-relaxed">{profile.bio}</p>
+              <p className="text-muted-foreground whitespace-pre-wrap leading-relaxed max-w-2xl mx-auto">{profile.bio}</p>
             </div>
           )}
 

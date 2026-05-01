@@ -24,19 +24,36 @@ export const uploadMedia = async (file: File): Promise<string> => {
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  const response = await fetch(`${BASE_URL}/media/v1/upload`, {
-    method: 'POST',
-    headers,
-    body: formData,
-  });
+  // Try multiple possible endpoints
+  const endpoints = [
+    `${BASE_URL}/media/v1/upload`,
+    `${BASE_URL}/v1/media/upload`,
+    `https://dotved-dzcgr.seliseblocks.com/media/v1/upload`,
+  ];
 
-  if (!response.ok) {
-    const err = await response.json().catch(() => ({ error: 'Upload failed' }));
-    throw new Error(err.message || err.error || 'Upload failed');
+  let lastError: Error | null = null;
+
+  for (const endpoint of endpoints) {
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers,
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data: MediaUploadResponse = await response.json();
+        return data.url || data.fileUrl || data.publicUrl || '';
+      }
+      
+      const err = await response.json().catch(() => ({ error: 'Upload failed' }));
+      lastError = new Error(err.message || err.error || `Upload failed: ${response.status}`);
+    } catch (e: any) {
+      lastError = e;
+    }
   }
 
-  const data: MediaUploadResponse = await response.json();
-
-  // Return the URL - check common response field names
-  return data.url || data.fileUrl || data.publicUrl || '';
+  // If we get here, all endpoints failed
+  console.error('Media upload failed:', lastError?.message);
+  throw lastError || new Error('Media upload failed - check if Media Block is enabled in Selise dashboard');
 };
