@@ -56,30 +56,33 @@ export default function ProfilePage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header Image */}
-      {profile.headerImageUrl && (
-        <div className="w-full h-64 bg-gray-200">
+      {profile.headerImageUrl ? (
+        <div className="w-full h-48 md:h-64 bg-gray-200 relative">
           <img
             src={profile.headerImageUrl}
             alt="Header"
             className="w-full h-full object-cover"
           />
+          <div className="absolute inset-0 bg-black/20" />
         </div>
+      ) : (
+        <div className="w-full h-48 md:h-64 bg-gradient-to-r from-blue-500 to-purple-600" />
       )}
 
-      <div className="max-w-4xl mx-auto px-6 -mt-16 relative z-10">
+      <div className="max-w-4xl mx-auto px-6 relative -mt-16 md:-mt-20">
         {/* Profile Card */}
-        <div className="bg-card rounded-lg shadow-lg p-8">
+        <div className="bg-card rounded-xl shadow-xl p-6 md:p-8 border">
           {/* Profile Picture */}
-          <div className="flex flex-col items-center -mt-20 mb-6">
+          <div className="flex flex-col items-center -mt-16 mb-6">
             {profile.profileImageUrl ? (
               <img
                 src={profile.profileImageUrl}
                 alt={profile.displayName}
-                className="w-32 h-32 rounded-full border-4 border-background object-cover"
+                className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-background object-cover shadow-lg"
               />
             ) : (
-              <div className="w-32 h-32 rounded-full border-4 border-background bg-gray-300 flex items-center justify-center">
-                <span className="text-4xl text-gray-600">
+              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-background bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center shadow-lg">
+                <span className="text-4xl md:text-5xl text-white font-bold">
                   {profile.displayName?.charAt(0) || '?'}
                 </span>
               </div>
@@ -88,7 +91,7 @@ export default function ProfilePage() {
 
           {/* Name & Headline */}
           <div className="text-center mb-6">
-            <h1 className="text-3xl font-bold">{profile.displayName || 'Unnamed User'}</h1>
+            <h1 className="text-3xl md:text-4xl font-bold">{profile.displayName || 'Unnamed User'}</h1>
             {profile.headline && (
               <p className="text-muted-foreground mt-2 text-lg">{profile.headline}</p>
             )}
@@ -96,21 +99,21 @@ export default function ProfilePage() {
 
           {/* Bio */}
           {profile.bio && (
-            <div className="mb-6">
-              <h2 className="text-xl font-semibold mb-2">About</h2>
-              <p className="text-muted-foreground whitespace-pre-wrap">{profile.bio}</p>
+            <div className="mb-8">
+              <h2 className="text-xl font-semibold mb-3">About</h2>
+              <p className="text-muted-foreground whitespace-pre-wrap leading-relaxed">{profile.bio}</p>
             </div>
           )}
 
           {/* Social Links */}
           {(profile.linkedInUrl || profile.githubUrl || profile.portfolioUrl) && (
-            <div className="flex justify-center gap-4 mt-6">
+            <div className="flex flex-wrap justify-center gap-3 mt-6">
               {profile.linkedInUrl && (
                 <a
                   href={profile.linkedInUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-md"
                 >
                   <Linkedin size={20} />
                   <span>LinkedIn</span>
@@ -121,7 +124,7 @@ export default function ProfilePage() {
                   href={profile.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gray-900 text-white hover:bg-gray-800 transition-colors shadow-md"
                 >
                   <Github size={20} />
                   <span>GitHub</span>
@@ -132,7 +135,7 @@ export default function ProfilePage() {
                   href={profile.portfolioUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors shadow-md"
                 >
                   <Globe size={20} />
                   <span>Portfolio</span>
@@ -145,7 +148,7 @@ export default function ProfilePage() {
         {/* Footer */}
         <div className="text-center mt-8 pb-8">
           <p className="text-sm text-muted-foreground">
-            Powered by <span className="font-semibold">ProfileForge</span>
+            Powered by <span className="font-semibold text-primary">ProfileForge</span>
           </p>
         </div>
       </div>

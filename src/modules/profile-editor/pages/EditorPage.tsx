@@ -106,10 +106,25 @@ export default function EditorPage() {
           ...formData,
           userId,
         });
-        // Reload profile to get the ItemId
-        const newProfile = await getMyProfile(userId);
-        setProfile(newProfile);
       }
+      
+      // Reload profile to sync state
+      const updatedProfile = await getMyProfile(userId);
+      if (updatedProfile) {
+        setProfile(updatedProfile);
+        setFormData({
+          username: updatedProfile.username || '',
+          displayName: updatedProfile.displayName || '',
+          headline: updatedProfile.headline || '',
+          bio: updatedProfile.bio || '',
+          profileImageUrl: updatedProfile.profileImageUrl || '',
+          headerImageUrl: updatedProfile.headerImageUrl || '',
+          linkedInUrl: updatedProfile.linkedInUrl || '',
+          githubUrl: updatedProfile.githubUrl || '',
+          portfolioUrl: updatedProfile.portfolioUrl || '',
+        });
+      }
+      
       alert('Profile saved successfully!');
     } catch (err: any) {
       alert('Failed to save profile: ' + (err.message || 'Unknown error'));
@@ -132,10 +147,13 @@ export default function EditorPage() {
     : '';
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="max-w-4xl mx-auto space-y-6">
+    <div className="min-h-screen bg-background flex flex-col items-center p-6">
+      <div className="w-full max-w-4xl space-y-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold">Profile Editor</h1>
+          <div className="flex items-center gap-3">
+            <img src="/selise_logo_small.svg" alt="ProfileForge" className="h-8 w-auto" />
+            <h1 className="text-3xl font-bold">Profile Editor</h1>
+          </div>
           <Button variant="outline" onClick={handleLogout}>
             Logout
           </Button>
