@@ -9,7 +9,7 @@ import { Input } from '@/components/ui-kit/input';
 import { Label } from '@/components/ui-kit/label';
 import { Textarea } from '@/components/ui-kit/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui-kit/card';
-import { UserProfile, UserProfileInput } from '@/types/profile';
+import { UserProfile } from '@/types/profile';
 
 // Helper to decode JWT and get user ID (sub claim)
 function getUserIdFromToken(token: string): string {
@@ -102,7 +102,7 @@ export default function EditorPage() {
         );
       } else {
         // Create new profile
-        const result = await createProfile({
+        await createProfile({
           ...formData,
           userId,
         });
