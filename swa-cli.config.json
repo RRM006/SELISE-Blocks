@@ -1,9 +1,11 @@
 {
-  "": "https://aka.ms/azure/static-web-apps-cli/schema",
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
   "configurations": {
-    "Lamit": {
+    "dotved": {
       "appDir": "build",
       "outputLocation": "build"
     }
+  }
+}
   }
 }

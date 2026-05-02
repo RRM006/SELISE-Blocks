@@ -23,7 +23,10 @@ yarn-error.log*
 # Local env files
 .env.local
 .env
-.env.*
+# Allow environment-specific files for build
+!.env.dev
+!.env.stg
+!.env.prod
 
 # IDE - VSCode
 .cursor/*
